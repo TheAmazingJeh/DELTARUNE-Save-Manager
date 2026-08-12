@@ -1,0 +1,11 @@
+{
+    "defaultChapter": 1,
+    "maximumChapter": 5,
+    "appID": 1671210,
+    "colors": {
+        "selectBackground": "#00c5ff",
+        "dropHighlight": "lightgreen",
+        "invalidHighlight": "lightcoral",
+        "dragWindowDefault": "lightblue"
+    }
+}

@@ -1,6 +1,6 @@
 import os
 
-from filemanager import copyFile
+from src.file_utils import copyFile
 
 fp = os.path.dirname(os.path.abspath(__file__))
 buildPath = os.path.join(fp, "build")
@@ -11,19 +11,23 @@ buildFileName = "main.py"
 iconName = "icon.ico"
 
 args = {
-    "name": "DSM_v0.1",
+    "name": "DSM_v0.3",
     # Max size: 760w 480h
     "splash": "splash2.png",
-    "onefile": None,
-    "clean": None,
-    #"specpath": specPath,
+    "onefile": "",
+    "clean": "",
+    "windowed": "",
+    # "specpath": specPath,
     "hide-console": "hide-early",
     "hidden-import": "pyi_splash",
 }
 
 includedFiles = [
     iconName,
-    "app_config.json",
+    "cfg_app.json",
+    "cfg_chapter.json",
+    "cfg_room_names.json",
+    "cfg_inventory_items.json",
 ]
 
 # Copy included files to the INTERNAL directory
@@ -36,7 +40,7 @@ for f in includedFiles:
 
 # Construct the command string, if a value is None, just put the key value
 # If a value is not None, put the key and value together
-runString = f"pyinstaller -i {iconName} {' '.join(f'--{k}' for k, v in args.items() if v is None)} --add-data \"INTERNAL:.\" {' '.join(f'--{k} {v}' for k, v in args.items() if v is not None)} {buildFileName}"
+runString = f'pyinstaller -i {iconName} {" ".join(f"--{k}" for k, v in args.items() if v == "")} --add-data "INTERNAL:." {" ".join(f"--{k} {v}" for k, v in args.items() if v != "")} {buildFileName}'
 
 print(f"Running: {runString}")
 
@@ -50,7 +54,7 @@ if os.path.exists(distPath):
             if os.path.exists(newPath):
                 os.remove(newPath)
             os.rename(itemPath, newPath)
-            print(f"Moved executable to main directory")
+            print("Moved executable to main directory")
     # Remove the dist directory
     os.rmdir(distPath)
 else:
