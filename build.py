@@ -11,13 +11,13 @@ buildFileName = "main.py"
 iconName = "icon.ico"
 
 args = {
-    "name": "DSM_v0.1",
+    "name": "DSM_v0.3",
     # Max size: 760w 480h
     "splash": "splash2.png",
     "onefile": "",
     "clean": "",
     "windowed": "",
-    #"specpath": specPath,
+    # "specpath": specPath,
     "hide-console": "hide-early",
     "hidden-import": "pyi_splash",
 }
@@ -40,7 +40,7 @@ for f in includedFiles:
 
 # Construct the command string, if a value is None, just put the key value
 # If a value is not None, put the key and value together
-runString = f"pyinstaller -i {iconName} {' '.join(f'--{k}' for k, v in args.items() if v == "")} --add-data \"INTERNAL:.\" {' '.join(f'--{k} {v}' for k, v in args.items() if v != "")} {buildFileName}"
+runString = f'pyinstaller -i {iconName} {" ".join(f"--{k}" for k, v in args.items() if v == "")} --add-data "INTERNAL:." {" ".join(f"--{k} {v}" for k, v in args.items() if v != "")} {buildFileName}'
 
 print(f"Running: {runString}")
 
